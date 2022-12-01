@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
             RHT_OCP4_DEV_USER = 'vkboes'
-            DEPLOYMENT_CONFIG_STAGE = 'shopping-cart-stage'
+            DEPLOYMENT_STAGE = 'shopping-cart-stage'
             DEPLOYMENT_CONFIG_PRODUCTION = 'shopping-cart-production'
         }
     stages {

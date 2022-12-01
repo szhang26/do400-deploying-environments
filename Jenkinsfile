@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
             RHT_OCP4_DEV_USER = 'vkboes'
-            DEPLOYMENT_STAGE = 'shopping-cart-stage'
+            DEPLOYMENT_CONFIG_STAGE = 'shopping-cart-stage'
             DEPLOYMENT_CONFIG_PRODUCTION = 'shopping-cart-production'
         }
     stages {
@@ -51,12 +51,7 @@ pipeline {
                 QUAY = credentials('QUAY_USER')
             }
             steps {
-                sh """
-                    oc set image \
-                    deploymentconfig ${DEPLOYMENT_STAGE} \
-                    shopping-cart-stage=quay.io/${QUAY_USR}/do400-deploying-environments:build-${BUILD_NUMBER} \
-                    -n ${APP_NAMESPACE} --record
-                """
+                sh "oc rollout latest dc/${DEPLOYMENT_CONFIG_STAGE} -n ${APP_NAMESPACE}"
             }
         }
     }
